@@ -31,6 +31,10 @@ class Carto::AnalysisNode
     definition[:options]
   end
 
+  def style
+    definition[:style]
+  end
+
   def children
     children_and_location.values
   end
