@@ -412,8 +412,10 @@ module Carto
       end
 
       def css_from(options)
-        style = options.include?('tile_style') ? options['tile_style'] : nil
-        (style.nil? || style.strip.empty?) ? EMPTY_CSS : options.fetch('tile_style')
+        analysis_style = @layer.style_from_analysis
+
+        style = analysis_style[:tile_style] || options['tile_style']
+        (style.nil? || style.strip.empty?) ? EMPTY_CSS : style
       end
 
       def wrap(query, options)
