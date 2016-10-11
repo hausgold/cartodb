@@ -66,6 +66,12 @@ class Layer < Sequel::Model
     end
   end
 
+  def after_update
+    unless base_layer?
+      Carto::Layer.find(id).update_analysis_style
+    end
+  end
+
   def before_save
     super
     self.updated_at = Time.now
