@@ -235,7 +235,7 @@ module Carto
       an = analysis_node
       an.style[:tile_style] = options[:tile_style]
 
-      analysis.update_attributes(definition: an.definition)
+      analysis.update_attributes(analysis_definition: an.definition)
     end
 
     private
