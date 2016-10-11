@@ -239,7 +239,7 @@ module Carto
     end
 
     def style_from_analysis
-      analysis_node.style
+      analysis_node.style if analysis_node
     end
 
     private
