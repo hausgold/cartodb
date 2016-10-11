@@ -232,9 +232,9 @@ module Carto
     end
 
     def update_analysis_style
-      an = analysis_node
-      an.style[:tile_style] = options['tile_style']
+      return unless an = analysis_node
 
+      an.style[:tile_style] = options['tile_style']
       analysis.update_attributes(analysis_definition: an.definition)
     end
 
