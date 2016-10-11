@@ -232,7 +232,7 @@ module Carto
     end
 
     def update_analysis_style
-      byebug
+      analysis_node.style[:tile_style] = options[:tile_style]
     end
 
     private
