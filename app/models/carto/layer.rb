@@ -231,7 +231,15 @@ module Carto
       map.force_notify_map_change if map
     end
 
+    def update_analysis_style
+      byebug
+    end
+
     private
+
+    def analysis_node
+      AnalysisNode.find_by_natural_id(visualization.id, options[:source])
+    end
 
     def tables_from_names(table_names, user)
       ::Table.get_all_user_tables_by_names(table_names, user)
