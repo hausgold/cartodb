@@ -232,10 +232,17 @@ module Carto
     end
 
     def update_analysis_style
-      analysis_node.style[:tile_style] = options[:tile_style]
+      an = analysis_node
+      an.style[:tile_style] = options[:tile_style]
+
+      analysis.update_attributes(definition: an.definition)
     end
 
     private
+
+    def analysis
+      Analysis.find_by_natural_id(visualization.id, options[:source])
+    end
 
     def analysis_node
       AnalysisNode.find_by_natural_id(visualization.id, options[:source])
