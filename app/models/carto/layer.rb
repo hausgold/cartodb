@@ -238,6 +238,10 @@ module Carto
       analysis.update_attributes(analysis_definition: an.definition)
     end
 
+    def style_from_analysis
+      analysis_node.style
+    end
+
     private
 
     def analysis
