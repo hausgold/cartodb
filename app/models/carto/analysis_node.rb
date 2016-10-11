@@ -32,7 +32,7 @@ class Carto::AnalysisNode
   end
 
   def style
-    definition[:style]
+    definition[:style] || Hash.new
   end
 
   def children
