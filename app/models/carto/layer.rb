@@ -247,11 +247,19 @@ module Carto
     end
 
     def tooltip
-      analysis_node.tooltip[:tooltip] || self[:tooltip]
+      if analysis_node && analysis_node.tooltip[:tooltip]
+        analysis_node.tooltip[:tooltip]
+      else
+        self[:tooltip]
+      end
     end
 
     def infowindow
-      analysis_node.infowindow[:infowindow] || self[:infowindow]
+      if analysis_node && analysis_node.infowindow[:infowindow]
+        analysis_node.infowindow[:infowindow]
+      else
+        self[:infowindow]
+      end
     end
 
     private
