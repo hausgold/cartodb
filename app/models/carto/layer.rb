@@ -232,7 +232,7 @@ module Carto
       map.force_notify_map_change if map
     end
 
-    def update_analysis_style
+    def update_analysis
       return if options['tile_style'] == Carto::Styles::Geometry.new.to_cartocss
       if visualization && visualization.persisted? && an = analysis_node
         an.style[:tile_style] = options['tile_style']
