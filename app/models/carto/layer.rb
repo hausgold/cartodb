@@ -233,18 +233,36 @@ module Carto
     end
 
     def update_analysis
-      return if options['tile_style'] == Carto::Styles::Geometry.new.to_cartocss
-      if visualization && visualization.persisted? && an = analysis_node
-        an.style[:tile_style] = options['tile_style']
-        analysis.update_attributes(analysis_definition: an.definition)
-      end
+      return unless should_update_analysis? && an = analysis_node
+
+      an.style[:tile_style] = options['tile_style']
+      an.infowindow[:infowindow] = infowindow
+      an.tooltip[:tooltip] = tooltip
+
+      analysis.update_attributes(analysis_definition: an.definition)
     end
 
     def style_from_analysis
       analysis_node.style if analysis_node
     end
 
+    def tooltip
+      analysis_node.tooltip[:tooltip] || self[:tooltip]
+    end
+
+    def infowindow
+      analysis_node.infowindow[:infowindow] || self[:infowindow]
+    end
+
     private
+
+    def should_update_analysis?
+      visualization && visualization.persisted? && !style_reset?
+    end
+
+    def style_reset?
+      options['tile_style'] == Carto::Styles::Geometry.new.to_cartocss
+    end
 
     def analysis
       Analysis.find_by_natural_id(visualization.id, options[:source])
