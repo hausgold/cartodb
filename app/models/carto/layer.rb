@@ -2,6 +2,7 @@ require 'active_record'
 require_relative './carto_json_serializer'
 require_dependency 'carto/table_utils'
 require_dependency 'carto/query_rewriter'
+require_dependency 'carto/styles/geometry'
 
 module Carto
   module LayerTableDependencies
@@ -232,6 +233,7 @@ module Carto
     end
 
     def update_analysis_style
+      return if options['tile_style'] == Carto::Styles::Geometry.new.to_cartocss
       if visualization && visualization.persisted? && an = analysis_node
         an.style[:tile_style] = options['tile_style']
         analysis.update_attributes(analysis_definition: an.definition)
