@@ -236,9 +236,9 @@ module Carto
       return unless should_update_analysis? && an = analysis_node
 
       an.style[:tile_style] = options['tile_style']
-      an.infowindow = infowindow
-      an.tooltip = tooltip
-      an.sytle_properties = options['sytle_properties']
+      an.options[:infowindow] = infowindow
+      an.options[:tooltip] = tooltip
+      an.options[:sytle_properties] = options['sytle_properties']
 
       analysis.update_attributes(analysis_definition: an.definition)
     end
