@@ -238,6 +238,7 @@ module Carto
       an.style[:tile_style] = options['tile_style']
       an.infowindow = infowindow
       an.tooltip = tooltip
+      an.sytle_properties = options['sytle_properties']
 
       analysis.update_attributes(analysis_definition: an.definition)
     end
