@@ -35,6 +35,14 @@ class Carto::AnalysisNode
     options[:style] || options[:style] = Hash.new
   end
 
+  def infowindow
+    options[:infowindow] || options[:infowindow] = Hash.new
+  end
+
+  def tooltip
+    options[:tooltip] || options[:tooltip] = Hash.new
+  end
+
   def children
     children_and_location.values
   end
