@@ -232,10 +232,10 @@ module Carto
     end
 
     def update_analysis_style
-      return unless an = analysis_node
-
-      an.style[:tile_style] = options['tile_style']
-      analysis.update_attributes(analysis_definition: an.definition)
+      if visualization && visualization.persisted? && an = analysis_node
+        an.style[:tile_style] = options['tile_style']
+        analysis.update_attributes(analysis_definition: an.definition)
+      end
     end
 
     def style_from_analysis
