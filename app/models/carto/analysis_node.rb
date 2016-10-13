@@ -28,11 +28,11 @@ class Carto::AnalysisNode
   end
 
   def options
-    definition[:options]
+    definition[:options] || definition[:options] = Hash.new
   end
 
   def style
-    definition[:style] || definition[:style] = Hash.new
+    options[:style] || options[:style] = Hash.new
   end
 
   def children
