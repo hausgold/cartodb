@@ -36,11 +36,11 @@ class Carto::AnalysisNode
   end
 
   def infowindow
-    options[:infowindow] || options[:infowindow] = Hash.new
+    options[:infowindow]
   end
 
   def tooltip
-    options[:tooltip] || options[:tooltip] = Hash.new
+    options[:tooltip]
   end
 
   def children
