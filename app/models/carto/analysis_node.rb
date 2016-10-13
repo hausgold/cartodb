@@ -43,6 +43,10 @@ class Carto::AnalysisNode
     options[:tooltip]
   end
 
+  def style_properties
+    options[:style_properties]
+  end
+
   def children
     children_and_location.values
   end
