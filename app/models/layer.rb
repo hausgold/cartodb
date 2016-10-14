@@ -67,7 +67,7 @@ class Layer < Sequel::Model
   end
 
   def after_update
-    unless persisted? && base_layer?
+    unless base_layer? || !persisted?
       Carto::Layer.find(id).update_analysis
     end
   end
