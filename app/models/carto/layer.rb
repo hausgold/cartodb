@@ -214,7 +214,7 @@ module Carto
       new_username = new_user.username
 
       if options.key?(:user_name)
-        old_username ||= options[:user_name]
+        old_username = options[:user_name] || old_username
         options[:user_name] = new_username
       end
 
@@ -230,6 +230,16 @@ module Carto
 
     def force_notify_change
       map.force_notify_map_change if map
+    end
+
+    CUSTOM_CATEGORIES = %w{Custom NASA TileJSON Mapbox WMS}.freeze
+
+    def custom?
+      CUSTOM_CATEGORIES.include?(category)
+    end
+
+    def category
+      options && options['category']
     end
 
     def update_analysis
