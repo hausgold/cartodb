@@ -43,7 +43,21 @@ module Carto
       end
 
       def update
-        @analysis.analysis_definition = analysis_definition_from_request
+        old_visualization_nodes = @visualization.analyses.map(&:analysis_node).map(&:descendants).flatten
+
+        byebug
+        new_analysis_node = AnalysisNode.new(analysis_definition_from_request.deep_symbolize_keys)
+        new_analysis_node.descendants.each do |node|
+          old_node = old_visualization_nodes.find { |n| n.id == node.id && n.style.present? }
+          old_node_style = old_node.style if old_node
+          if old_node_style.present?
+            node.options[:style] = old_node_style
+          else
+            node.options.delete(:style)
+          end
+        end
+
+        @analysis.analysis_definition = new_analysis_node.definition
         @analysis.save!
         render_jsonp(AnalysisPresenter.new(@analysis).to_poro, 200)
       end

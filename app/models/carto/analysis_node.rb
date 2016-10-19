@@ -32,7 +32,7 @@ class Carto::AnalysisNode
   end
 
   def style
-    options[:style] || options[:style] = Hash.new
+    options[:style] ||= Hash.new
   end
 
   def infowindow
@@ -67,6 +67,10 @@ class Carto::AnalysisNode
   def table_source?(table_name)
     # Maybe check params[:query]
     source? && options && options[:table_name] == table_name
+  end
+
+  def descendants
+    [self] + children.map(&:descendants).flatten
   end
 
   def source_descendants
