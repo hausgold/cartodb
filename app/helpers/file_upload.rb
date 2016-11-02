@@ -96,8 +96,10 @@ module CartoDB
       AWS.config(
         access_key_id: s3_config['access_key_id'],
         secret_access_key: s3_config['secret_access_key'],
-        proxy_uri: (s3_config['proxy_uri'].present? ?  s3_config['proxy_uri'] : nil),
-        use_ssl: s3_config['use_ssl']
+        proxy_uri: (s3_config['proxy_uri'].present? ? s3_config['proxy_uri'] : nil),
+        use_ssl: s3_config['use_ssl'],
+        s3_signature_version: :v4,
+        region: 'eu-central-1'
       )
       s3_bucket = AWS::S3.new.buckets[s3_config['bucket_name']]
 
